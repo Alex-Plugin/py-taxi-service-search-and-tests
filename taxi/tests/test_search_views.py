@@ -8,6 +8,7 @@ MANUFACTURER_LIST_URL = reverse("taxi:manufacturer-list")
 CAR_LIST_URL = reverse("taxi:car-list")
 DRIVER_LIST_URL = reverse("taxi:driver-list")
 
+
 class PrivateSearchViewTestBase(TestCase):
     def setUp(self) -> None:
 
@@ -56,7 +57,9 @@ class ManufacturerSearchViewTest(PrivateSearchViewTestBase):
     def test_search_manufacturer_no_results(self):
         response = self.client.get(MANUFACTURER_LIST_URL, {"name": "ZZZ"})
         self.assertEqual(response.status_code, 200)
-        self.assertQuerySetEqual(list(response.context["manufacturer_list"]), [])
+        self.assertQuerySetEqual(
+            list(response.context["manufacturer_list"]), []
+        )
 
     def test_search_manufacturer_empty_query(self):
         response = self.client.get(MANUFACTURER_LIST_URL, {"name": ""})

@@ -52,8 +52,14 @@ class PrivateManufacturerListView(PrivateViewTestBase):
 
 class PrivateCarListView(PrivateViewTestBase):
     def test_retrieve_car_list(self):
-        manufacturer_audi = Manufacturer.objects.create(name="Audi", country="DE")
-        manufacturer_bmw = Manufacturer.objects.create(name="BMW", country="DE")
+        manufacturer_audi = Manufacturer.objects.create(
+            name="Audi",
+            country="DE"
+        )
+        manufacturer_bmw = Manufacturer.objects.create(
+            name="BMW",
+            country="DE"
+        )
         Car.objects.create(model="A4", manufacturer=manufacturer_audi)
         Car.objects.create(model="3", manufacturer=manufacturer_bmw)
 
@@ -69,19 +75,21 @@ class PrivateCarListView(PrivateViewTestBase):
 
 class PrivateDriverListView(PrivateViewTestBase):
     def test_retrieve_driver_list(self):
-        driver1 = get_user_model().objects.create_user(
+        get_user_model().objects.create_user(
             username="test1",
             password="test123",
-            license_number = "AAA111",
+            license_number="AAA111",
         )
-        driver2 = get_user_model().objects.create_user(
+        get_user_model().objects.create_user(
             username="test2",
             password="test456",
-            license_number = "BBB222",
+            license_number="BBB222",
         )
         response = self.client.get(DRIVER_LIST_URL)
         self.assertEqual(response.status_code, 200)
-        expected_drivers = list(get_user_model().objects.filter(is_superuser=False))
+        expected_drivers = list(
+            get_user_model().objects.filter(is_superuser=False)
+        )
         self.assertQuerySetEqual(
             list(response.context["driver_list"]),
             expected_drivers,

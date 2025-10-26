@@ -53,6 +53,9 @@ class ModelTest(TestCase):
         self.assertEqual(driver.license_number, license_number)
 
     def test_driver_get_absolute_url(self):
-        driver = get_user_model().objects.create_user(username="test", password="123")
+        driver = get_user_model().objects.create_user(
+            username="test",
+            password="123"
+        )
         expected_url = f"/drivers/{driver.pk}/"
         self.assertEqual(driver.get_absolute_url(), expected_url)

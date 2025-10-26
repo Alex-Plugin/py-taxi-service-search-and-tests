@@ -32,9 +32,3 @@ class CarAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Manufacturer)
-
-# Username: admin.user
-# Email address: test@user.com
-# Password: 1qazcde3
-# Password (again): 1qazcde3
-# Superuser created successfully
